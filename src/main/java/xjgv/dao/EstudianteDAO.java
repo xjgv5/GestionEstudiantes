@@ -74,20 +74,57 @@ public class EstudianteDAO {
         return false;
     }
 
+    public boolean agregarEstudiante(Estudiante estudiante){
+        PreparedStatement ps;
+        Connection con = getConection();
+        String sql = "INSERT INTO estudiante(nombre, apellido, telefono, email) " +
+                "VALUES(? , ?, ?, ?)";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, estudiante.getNombre());
+            ps.setString(2, estudiante.getApellido());
+            ps.setString(3, estudiante.getTelefono());
+            ps.setString(4, estudiante.getEmail());
+            ps.execute();
+            return  true;
+        }catch (Exception e){
+            System.out.println("Ocurrio un error al agregar al estudiante : " + e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }catch (Exception e){
+                System.out.println("Ocurrio un problema al cerrar la conexion : " + e.getMessage());
+            }
+
+        }
+        return  false;
+    }
+
     public static void main(String[] args) {
         //listando estudiantes
         var estudianteDao  = new EstudianteDAO();
+
+        //agregar estudiante
+        var nuevoEstudiante = new Estudiante("Carlos", "Lara", "21213444", "carlos@email.com");
+        var agregado = estudianteDao.agregarEstudiante(nuevoEstudiante);
+        if (agregado)
+            System.out.println("Los datos del estudiante se agregaron correctamente: " + nuevoEstudiante);
+        else
+            System.out.println("No se pudo agregar al estudiante : " + nuevoEstudiante);
+
+
         //System.out.println("Listado de estudiantes");
         List<Estudiante> estudiantes = estudianteDao.listar();
-        //estudiantes.forEach(System.out::println);
+        estudiantes.forEach(System.out::println);
 
         //buscar por id
-        var estudiante1 = new Estudiante(3);
+       /* var estudiante1 = new Estudiante(3);
         System.out.println("Estudiante antes de la busqueda: " + estudiante1); //Objeto vacio
         var encontrado = estudianteDao.buscarEstudiantePorID(estudiante1);
         if(encontrado)
             System.out.println("Estudiante encontrado: " + estudiante1);
         else
-            System.out.println("No se encontro el estudiante con id :" + estudiante1.getIdEstudiante());
+            System.out.println("No se encontro el estudiante con id :" + estudiante1.getIdEstudiante()); */
     }
 }
