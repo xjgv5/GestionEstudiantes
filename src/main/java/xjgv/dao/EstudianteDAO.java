@@ -151,30 +151,5 @@ public class EstudianteDAO {
         return false;
 
     }
-
-    public static void main(String[] args) {
-        //listando estudiantes
-        var estudianteDao  = new EstudianteDAO();
-
-
-
-
-        var estudianteEliminado = new Estudiante(3);
-        var eliminado = estudianteDao.emilinarEstudiante(estudianteEliminado);
-        if (eliminado)
-            System.out.println("Se ha eliminado el estudiante con id : " + estudianteEliminado.getIdEstudiante());
-        else
-            System.out.println("No se ha podido eliminar el estudiante : " + estudianteEliminado);
-        System.out.println("------------------------------");
-        //System.out.println("Listado de estudiantes");
-
-        //buscar por id
-       /* var estudiante1 = new Estudiante(3);
-        System.out.println("Estudiante antes de la busqueda: " + estudiante1); //Objeto vacio
-        var encontrado = estudianteDao.buscarEstudiantePorID(estudiante1);
-        if(encontrado)
-            System.out.println("Estudiante encontrado: " + estudiante1);
-        else
-            System.out.println("No se encontro el estudiante con id :" + estudiante1.getIdEstudiante()); */
-    }
+    
 }
