@@ -128,6 +128,30 @@ public class EstudianteDAO {
         return false;
     }
 
+    public boolean emilinarEstudiante(Estudiante estudiante){
+        PreparedStatement ps;
+        Connection con = getConection();
+        String sql = "DELETE FROM estudiante WHERE idestudiante = ?";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, estudiante.getIdEstudiante());
+            ps.execute();
+            return true;
+        }catch (Exception e){
+            System.out.println("Problema al eliminar al estudiante " + estudiante.getNombre() + " " + estudiante.getApellido() + " : " + e.getMessage());
+        }
+        finally {
+            try {
+                con.close();
+            } catch (Exception e){
+                System.out.println("Error al cerrar la conexion : " + e.getMessage());
+            }
+        }
+
+        return false;
+
+    }
+
     public static void main(String[] args) {
         //listando estudiantes
         var estudianteDao  = new EstudianteDAO();
@@ -147,13 +171,19 @@ public class EstudianteDAO {
         estudiantes.forEach(System.out::println);
 
         //modificacion de un estudiante ya existente
-        var estudianteModificar = new Estudiante(6, "Eduardo", "Quiroz", "2345243562", "eduardo@email.com");
+        /*var estudianteModificar = new Estudiante(6, "Eduardo", "Quiroz", "2345243562", "eduardo@email.com");
         var modificado = estudianteDao.modificarEstudiante(estudianteModificar);
         if (modificado)
             System.out.println("Estudiante modificado con exito ! ");
         else
-            System.out.println("Ha ocurrido un error durante la modificacion !");
+            System.out.println("Ha ocurrido un error durante la modificacion !"); */
 
+        var estudianteEliminado = new Estudiante(3);
+        var eliminado = estudianteDao.emilinarEstudiante(estudianteEliminado);
+        if (eliminado)
+            System.out.println("Se ha eliminado el estudiante con id : " + estudianteEliminado.getIdEstudiante());
+        else
+            System.out.println("No se ha podido eliminar el estudiante : " + estudianteEliminado);
         System.out.println("------------------------------");
         //System.out.println("Listado de estudiantes");
 
