@@ -156,27 +156,8 @@ public class EstudianteDAO {
         //listando estudiantes
         var estudianteDao  = new EstudianteDAO();
 
-        //agregar estudiante
-        /*var nuevoEstudiante = new Estudiante("Elias", "Hernandez", "232133444", "alberto@email.com");
-        var agregado = estudianteDao.agregarEstudiante(nuevoEstudiante);
-        if (agregado)
-            System.out.println("Los datos del estudiante se agregaron correctamente: " + nuevoEstudiante);
-        else
-            System.out.println("No se pudo agregar al estudiante : " + nuevoEstudiante);
-        */
 
-        System.out.println("-----------------------------------");
-        //System.out.println("Listado de estudiantes");
-        List<Estudiante> estudiantes = estudianteDao.listar();
-        estudiantes.forEach(System.out::println);
 
-        //modificacion de un estudiante ya existente
-        /*var estudianteModificar = new Estudiante(6, "Eduardo", "Quiroz", "2345243562", "eduardo@email.com");
-        var modificado = estudianteDao.modificarEstudiante(estudianteModificar);
-        if (modificado)
-            System.out.println("Estudiante modificado con exito ! ");
-        else
-            System.out.println("Ha ocurrido un error durante la modificacion !"); */
 
         var estudianteEliminado = new Estudiante(3);
         var eliminado = estudianteDao.emilinarEstudiante(estudianteEliminado);
@@ -187,7 +168,6 @@ public class EstudianteDAO {
         System.out.println("------------------------------");
         //System.out.println("Listado de estudiantes");
 
-        estudiantes.forEach(System.out::println);
         //buscar por id
        /* var estudiante1 = new Estudiante(3);
         System.out.println("Estudiante antes de la busqueda: " + estudiante1); //Objeto vacio
